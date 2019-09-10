@@ -1,0 +1,30 @@
+from django.forms import ModelForm
+from django import forms
+from . models import Kitchen, Dish
+
+
+# DAYS_OF_WEEK = (
+#     ('0', 'Monday'),
+#     ('1', 'Tuesday'),
+#     ('2', 'Wednesday'),
+#     ('3', 'Thursday'),
+#     ('4', 'Friday'),
+#     ('5', 'Saturday'),
+#     ('6', 'Sunday'),
+# )
+
+
+class KitchenForm(ModelForm):
+    # widgets = {'day': forms.CheckboxSelectMultiple}
+    # widgets = {'password': forms.PasswordInput}
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = Kitchen
+        fields = ('name', 'email', 'password', 'day', 'start_time', 'end_time', 'image')
+
+
+class DishForm(ModelForm):
+    class Meta:
+        model = Dish
+        fields = ('name', 'veg', 'description', 'price', 'image')
+

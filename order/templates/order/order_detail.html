@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Detail</title>
+</head>
+<body>
+    <h1>Order Detail</h1>
+    <p>Order No. {{ order.id }}</p>
+    <p>{{ order.first_name }}</p>
+    <p>{{ order.last_name }}</p>
+    <p>{{ order.address }}</p>
+    <p>{{ order.delivery }}</p>
+    <p>{{ order.provider.name }}</p>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.dish.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.get_cost }}</td>
+    </tr>
+    {% endfor %}
+    <p>{{ order.get_total_cost }}</p>
+</body>
+</html>

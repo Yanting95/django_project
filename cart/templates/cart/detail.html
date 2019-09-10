@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+<div class="shopping-cart">
+    <div class="title">Shopping Cart</div>
+    <table class="cart">
+      <tr>
+          <th></th>
+          <th>Dish</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Remove</th>
+          <th>Price</th>
+      </tr>
+     {% for item in cart %}
+     <tr class="item">
+          <td class="image"><img src="static/img/no_image.png"></td>
+          <td>{{item.dish.name}}</td>
+          <td>${{item.price}}</td>
+          <td>
+              <form action="{% url "cart:cart_add" item.dish.id %}" method="post">
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.update }}
+                <input type="submit" value="Update">
+                {% csrf_token %}
+              </form>
+          </td>
+          <td><button><a href="{% url "cart:cart_remove" item.dish.id %}">Remove</a></button></td>
+          <td>${{item.total_price}}</td>
+     </tr>
+     {% endfor %}
+    </table>
+    <p>Total: ${{cart.get_total_price}}</p>
+    <a href="/cart/clear">Clear All</a>
+    <a href="/kitchens">Continue Shopping</a>
+    <a href="{% url "orders:order_create" %}" class="button">Checkout</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitchen</title>
+</head>
+<body>
+{% block content %}
+<h1>
+    Kitchens
+</h1>
+<a href="/kitchens/new">Register new kitchen</a>
+<ul>
+    {% for kitchen in kitchen_list %}
+        <li><a href="{% url 'kitchen:kitchen_details' kitchen.id %}">
+            {{ kitchen.name }}</a></li>
+    {% empty %}<li>Sorry, no restaurants registered yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+</body>
+</html>

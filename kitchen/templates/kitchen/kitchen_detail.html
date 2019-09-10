@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+{% block content %}
+<h1>
+    {{ kitchen.name }}
+
+</h1>
+<p>{{ kitchen.day }}</p>
+<p>{{ kitchen.start_time }}</p>
+<p>{{ kitchen.end_time }}</p>
+<p><img src="{{ kitchen.image }}"/></p>
+<h2>
+    Dishes
+    <a href="{% url 'kitchen:dish_new' kitchen.id %}">add</a>
+</h2>
+<ul>
+    {% for dish in kitchen.dishes.all %}
+        <li><a href="{% url 'kitchen:dish_details' kitchen.id dish.id %}">
+            {{ dish.name }}</a></li>
+    {% empty %}<li>Sorry, no dishes for this restaurant yet.</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+</body>
+</html>
