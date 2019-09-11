@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<h2>Order History</h2>
+{% for order in orders %}
+<ul>
+    <li><a href="/order/{{order.id}}">{{ order.id }}</a></li>
+    <li>{{ order.user.first_name }}</li>
+    <li>{{ order.address }}</li>
+    <li>{{ order.delivery }}</li>
+</ul>
+{% endfor %}
+</body>
+</html>

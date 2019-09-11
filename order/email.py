@@ -7,9 +7,9 @@ from feast_freedom.settings import EMAIL_FROM
 def order_created(order_id):
     order = Order.objects.get(id=order_id)
     subject = 'Confirmation of Order no. {}'.format(order.id)
-    message_user = 'Dear {},\n\nYou have successfully placed an order. Your order id is {}.'.format(order.user,
+    message_user = 'Dear {},\n\nYou have successfully placed an order. Your order id is {}.'.format(order.user.first_name,
                                                                              order.id)
-    message_kitchen = 'Dear {},\n\nYou have received an order. The order id is {}.'.format(order.user,
+    message_kitchen = 'Dear {},\n\nYou have received an order. The order id is {}.'.format(order.provider.name,
                                                                                                order.id)
     message1 = (subject, message_user, EMAIL_FROM, [order.user.email])
     kitchen = Kitchen.objects.get(id=order.provider_id)

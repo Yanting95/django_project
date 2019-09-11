@@ -58,3 +58,8 @@ class Cart(object):
 
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def get_provider(self):
+        for dish_id in self.cart.keys():
+            dish = Dish.objects.get(id=dish_id)
+        return dish.kitchen

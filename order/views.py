@@ -6,16 +6,18 @@ from .forms import OrderCreateForm
 # from .tasks import order_created
 from cart.cart import Cart
 from .email import order_created
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
-            # order.user = request.user
-            for item in cart:
-                kitchen = item['dish'].kitchen
+            order.user = request.user
+            kitchen = cart.get_provider()
             order.provider = kitchen
             order.save()
             for item in cart:
@@ -32,13 +34,20 @@ def order_create(request):
     else:
         form = OrderCreateForm()
     return render(request, 'order/create.html', {'cart': cart,
-                                                        'form': form})
+                                                 'form': form})
 
 
+@login_required
 def order_detail(request, order_id):
     order = get_object_or_404(Order,pk=order_id)
     items = OrderItem.objects.filter(order=order_id)
     # kitchen = Kitchen.objects.get(pk=order.provider)
     # dishes = Dish.objects.filter(pk__in=items.dish)
     return render(request, 'order/order_detail.html', {'order': order, 'items': items})
+
+
+@login_required
+def order_list(request):
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'order/order_list.html', {'orders': orders})
 

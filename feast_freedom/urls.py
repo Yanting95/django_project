@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'', include(('kitchen.urls', 'kitchen'), namespace='kitchen')),
     url(r'', include(('order.urls', 'order'), namespace='order')),
     url(r'', include(('cart.urls', 'cart'), namespace='cart')),
-    # url(r'^accounts/login/$', LoginView.as_view(), name='login'),
-    # url(r'^accounts/logout/$', LogoutView.as_view(), name='logout'),
-    # url(r'^$', TemplateView.as_view(template_name='test.html')),
+    url(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    url(r'^accounts/logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^$', TemplateView.as_view(template_name='test.html')),
 ]

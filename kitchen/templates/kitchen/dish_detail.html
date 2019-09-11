@@ -7,12 +7,10 @@
 <body>
 {% block content %}
 
-<h1>
-    {{ dish.name }}
-</h1>
-<p>{{ dish.veg }}</p>
-<p>{{ dish.description }}</p>
-<p>${{ dish.price }}</p>
+<h1>{{ dish.name }}</h1>
+<p>Veg: {{ dish.veg }}</p>
+<p>Description: {{ dish.description|linebreaksbr }}</p>
+<p>Price: ${{ dish.price }}</p>
 {% if dish.image %}
     <p><img src="{{ dish.image }}"/></p>
 {% endif %}

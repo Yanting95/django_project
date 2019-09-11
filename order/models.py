@@ -10,7 +10,7 @@ class Order(models.Model):
     address = models.CharField(max_length=250)
     delivery = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
-    # user = models.ForeignKey(User, related_name='order', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='order', on_delete=models.CASCADE)
     provider = models.ForeignKey(Kitchen, related_name='order', on_delete=models.CASCADE)
 
     class Meta:
