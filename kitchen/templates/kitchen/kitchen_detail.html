@@ -27,7 +27,9 @@ Sun {% endif %}
 </p>
 <p>{{ kitchen.start_time }}</p>
 <p>{{ kitchen.end_time }}</p>
-<p><img src="{{ kitchen.image }}"/></p>
+{% if kitchen.image %}
+<p><img src="{{ kitchen.image.url }}" style="width: 120px"/></p>
+{% endif %}
 <h2>
 <a href="{% url 'kitchen:dish_list' kitchen.id %}">Menu</a>
 </h2>

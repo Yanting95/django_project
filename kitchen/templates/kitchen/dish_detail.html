@@ -11,7 +11,7 @@
 <p>Description: {{ dish.description|linebreaksbr }}</p>
 <p>Price: ${{ dish.price }}</p>
 {% if dish.image %}
-    <p><img src="{{ dish.image }}"/></p>
+    <p><img src="{{ dish.image.url }}" style="width: 120px"/></p>
 {% endif %}
 <form action="{% url "cart:cart_add" dish.id %}" method="post">
     {{ cart_add_form }}

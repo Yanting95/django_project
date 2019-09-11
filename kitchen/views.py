@@ -18,7 +18,7 @@ def kitchen_details(request,pk):
 @login_required
 def kitchen_new(request):
     if request.method == "POST":
-        form = KitchenForm(request.POST)
+        form = KitchenForm(request.POST, request.FILES)
         days_form = DaysForm(request.POST)
         if form.is_valid() and days_form.is_valid():
             work_days = days_form.save()
@@ -36,7 +36,7 @@ def kitchen_update(request,pk):
     kitchen = Kitchen.objects.get(id=pk)
     days = Days.objects.get(id=kitchen.days.id)
     if request.method == "POST":
-        form = KitchenForm(request.POST, instance=kitchen)
+        form = KitchenForm(request.POST, request.FILES, instance=kitchen)
         days_form = DaysForm(request.POST, instance=days)
         if form.is_valid() and days_form.is_valid():
             work_days = days_form.save()
@@ -67,7 +67,7 @@ def dish_details(request,pkk,pk):
 @login_required
 def dish_new(request,pk):
     if request.method == "POST":
-        form = DishForm(request.POST)
+        form = DishForm(request.POST, request.FILES)
         if form.is_valid():
             dish = form.save(commit=False)
             dish.kitchen = Kitchen.objects.get(id=pk)
@@ -81,7 +81,7 @@ def dish_new(request,pk):
 def dish_update(request, pkk, pk):
     dish = get_object_or_404(Dish, id=pk)
     if request.method == "POST":
-        form = DishForm(request.POST, instance=dish)
+        form = DishForm(request.POST, request.FILES, instance=dish)
         if form.is_valid():
             dish = form.save(commit=False)
             dish.kitchen = Kitchen.objects.get(id=pkk)
