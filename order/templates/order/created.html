@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cart</title>
-</head>
-<body>
+{% extends "base.html" %}
+
 {% block title %}
     Thank you
 {% endblock %}
@@ -14,5 +9,3 @@
     <p>Your order has been successfully completed. Your order number is <strong>{{ order.id }}</strong>.</p>
     <p><a href="/order/{{ order.id }}">View Order Detail</a></p>
 {% endblock %}
-</body>
-</html>

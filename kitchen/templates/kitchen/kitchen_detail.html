@@ -1,35 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+    Kitchen
+{% endblock %}
+
 {% block content %}
 <h1>
     {{ kitchen.name }}
 
 </h1>
-<p>{{ kitchen.day }}</p>
+<p>
+{% if kitchen.days.Monday == 1 %}
+Mon {% endif %}
+{% if kitchen.days.Tuesday == 1 %}
+Tue {% endif %}
+{% if kitchen.days.Wednesday == 1 %}
+Wed {% endif %}
+{% if kitchen.days.Thursday == 1 %}
+Thur {% endif %}
+{% if kitchen.days.Friday == 1 %}
+Fri {% endif %}
+{% if kitchen.days.Saturday == 1 %}
+Sat {% endif %}
+{% if kitchen.days.Sunday == 1 %}
+Sun {% endif %}
+</p>
 <p>{{ kitchen.start_time }}</p>
 <p>{{ kitchen.end_time }}</p>
 <p><img src="{{ kitchen.image }}"/></p>
 <h2>
-    Dishes
-    <a href="{% url 'kitchen:dish_new' kitchen.id %}">add</a>
+<a href="{% url 'kitchen:dish_list' kitchen.id %}">Menu</a>
 </h2>
-<ul>
-    {% for dish in kitchen.dishes.all %}
-        <li><a href="{% url 'kitchen:dish_details' kitchen.id dish.id %}">
-            {{ dish.name }}</a></li>
-    {% empty %}<li>Sorry, no dishes for this restaurant yet.</li>
-    {% endfor %}
-</ul>
-
-
+{% if request.user == kitchen.user %}
+    <a href="{% url 'kitchen:kitchen_update' kitchen.id %}">edit kitchen info</a>
+    <a href="{% url 'kitchen:dish_new' kitchen.id %}">add dishes</a>
+{% endif %}
 {% endblock %}
 {% block footer %}
 
 {% endblock %}
-</body>
-</html>

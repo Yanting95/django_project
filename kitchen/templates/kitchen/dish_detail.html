@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dish</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+    Dish
+{% endblock %}
+
 {% block content %}
 
 <h1>{{ dish.name }}</h1>
@@ -21,10 +20,11 @@
 </form>
 <p>Served by <a href="{% url 'kitchen:kitchen_details' kitchen.id %}">{{ kitchen.name }}</a></p>
 
+{% if request.user == kitchen.user %}
+    <a href="{% url 'kitchen:dish_update' kitchen.id dish.id %}">edit dish info</a>
+{% endif %}
 {% endblock %}
 
 {% block footer %}
 
 {% endblock %}
-</body>
-</html>

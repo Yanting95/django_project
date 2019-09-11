@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from . models import Kitchen, Dish
+from . models import Kitchen, Dish, Days
 
 
 # DAYS_OF_WEEK = (
@@ -20,11 +20,17 @@ class KitchenForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = Kitchen
-        fields = ('name', 'email', 'password', 'day', 'start_time', 'end_time', 'image')
+        fields = ('name', 'email', 'password', 'start_time', 'end_time', 'image')
 
 
 class DishForm(ModelForm):
     class Meta:
         model = Dish
         fields = ('name', 'veg', 'description', 'price', 'image')
+
+
+class DaysForm(ModelForm):
+    class Meta:
+        model = Days
+        fields = ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
 

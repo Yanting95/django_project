@@ -28,6 +28,7 @@ def cart_remove(request, dish_id):
     cart = Cart(request)
     dish = get_object_or_404(Dish, id=dish_id)
     cart.remove(dish)
+    messages.success(request, 'Remove dishes successfully.')
     return redirect('cart:cart_detail')
 
 

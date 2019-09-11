@@ -1,23 +1,31 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Checkout</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
-</head>
-<body>
+{% block title %}
+    CheckOut
+{% endblock %}
 
 {% block content %}
-    <h1>Checkout</h1>
-    
-    <div class="order-info">
+
+<h2>CheckOut</h2>
+<div class="row">
+
+    <div class="col-75">
+    <div class="container">
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Last Name: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+    <form action="." method="post" >
+        <div class="col-50">
+        {{ form.as_p }}
+        <input type="submit" value="Place order" class="btn">
+        {% csrf_token %}
+        </div>
+    </form>
+    </div>
+    </div>
+
+    <div class="col-25">
+    <div class="container">
         <h3>Your order</h3>
         <ul>
             {% for item in cart %}
@@ -26,17 +34,7 @@
         </ul>
         <p>Total: ${{ cart.get_total_price }}</p>
     </div>
-
-    <div class="order-form">
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Last Name: {{ user.last_name }}</p>
-        <p>Email: {{ user.email }}</p>
-    <form action="." method="post" >
-        {{ form.as_p }}
-        <p><input type="submit" value="Place order"></p>
-        {% csrf_token %}
-    </form>
     </div>
+</div>
 {% endblock %}
-</body>
-</html>
+

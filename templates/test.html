@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test</title>
+{% extends "base.html" %}
+
+{% block title %}
+    Thank you
+{% endblock %}
+
+{% block content %}
     <h1>hello</h1>
     <p>This is a test homepage</p>
-</head>
-<body>
+
     <a href="/kitchens">kitchen</a>
     {% if user.is_authenticated %}
     <a href="/accounts/logout">logout</a>
     {% else %}
     <a href="/accounts/login">login</a>
     {% endif %}
-</body>
-</html>
+{% endblock %}

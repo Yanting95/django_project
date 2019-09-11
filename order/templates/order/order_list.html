@@ -1,18 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Order</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+    Order
+{% endblock %}
+
+{% block content %}
 <h2>Order History</h2>
+<table class="order_list">
+    <tr>
+        <th>Order No.</th>
+        <th>Provider</th>
+        <th>Address</th>
+        <th>Delivery</th>
+        <th>Cost</th>
+    </tr>
 {% for order in orders %}
-<ul>
-    <li><a href="/order/{{order.id}}">{{ order.id }}</a></li>
-    <li>{{ order.user.first_name }}</li>
-    <li>{{ order.address }}</li>
-    <li>{{ order.delivery }}</li>
-</ul>
-{% endfor %}
-</body>
-</html>
+<tr>
+    <td><a href="/order/{{order.id}}">{{ order.id }}</a></td>
+    <td>{{ order.provider.name }}</td>
+    <td>{{ order.address }}</td>
+    <td>{{ order.delivery }}</td>
+    <td>${{ order.get_total_cost }}</td>
+</tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

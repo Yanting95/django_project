@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+    Menu
+{% endblock %}
+
 {% block content %}
+
 <h1>
-    Dishes
+    Menu
 </h1>
 <ul>
     {% for dish in dish_list %}
-        <li><a href="{% url 'kitchen:dish_details' dish.id %}">
+        <li><a href="{% url 'kitchen:dish_details' dish.kitchen.id dish.id %}">
             {{ dish.name }}</a></li>
     {% empty %}<li>Sorry, no restaurants registered yet.</li>
     {% endfor %}
 </ul>
 {% endblock %}
-</body>
-</html>
